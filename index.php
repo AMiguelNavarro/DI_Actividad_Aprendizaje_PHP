@@ -10,9 +10,13 @@ include 'vista/layout/header_index.php';
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">Inicio</a></li>
+                <li><a href="vista/comentarios_vista.php">Comentarios</a></li>
             </ul>
         </div>
     </nav>
+
+
+
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Foro de Desarrollo de Interfaces</h1>

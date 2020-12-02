@@ -1,11 +1,3 @@
-<?php
-// Compueba si se ha iniciado sesión, en caso de ser así redirecciona a los comentarios
-    session_start();
-    if (isset($_SESSION['usuario'])) {
-        header("Location:comentarios_vista.php");
-    } else {
-?>
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -47,11 +39,15 @@
         </div>
     </div>
     <div id="contenedor-errores">
-
+        <?php
+            require_once '../modelo/login_modelo.php';
+            $datos = getUsuario();
+            if (!isset($datos)) {
+                echo "<p>Error</p>";
+            }
+        ?>
     </div>
 </body>
 </html>
-<?php
-    }
-    ?>
+
 

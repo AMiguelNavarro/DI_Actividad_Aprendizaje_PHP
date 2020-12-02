@@ -1,6 +1,4 @@
 <?php
-    // Se abre la sesión
-    session_start();
 
     // Se llama al archivo que contiene la conexión
     require_once 'configuracion/conexion.php';

@@ -1,27 +1,32 @@
 <?php
-
 include 'configuracion/conexion.php';
 
+class ComentariosModelo {
+    private $db;
+    private $comentarios;
 
-/**
- * Devuelve un array con todos los comentarios de la base de datos
- * @return array
- */
-function getlistadoComentarios() {
-    $db = getConexion();
-    $sql = 'SELECT * FROM comentario';
-    $resultado = $db -> query($sql);
-
-    $comentarios = array();
-    while ($comentario = $resultado -> fetch()) {
-        $this -> comentarios[] = $comentario;
+    // Se encarga de conectar con l base de datos
+    public function __construct(){
+        require_once 'configuracion/conexion.php';
+        $db = Conectar::getConexion(); // Se guarda la conexión en la variable $db
+        $this -> comentarios = array(); // instancia el array que  tendrá los comentarios
     }
 
-    return $comentarios;
+
+    /**
+     * Devuelve un array con los comentarios de la base de datos
+     * @return array
+     */
+    public function  getComentarios() {
+        $consultaSQL = $this -> db -> query ("SELECT * FROM comentario");
+
+        // Pasa el contenido del array de la consulta al array de comentarios
+        while ($filas = $consultaSQL -> fetchAll(PDO::FETCH_ASSOC)) {
+            $this -> comentarios[] = $filas;
+        }
+
+        return $this->comentarios; // Devuelve el array con los comentarios
+
+    }
 }
 
-
-function insertarComentario($fecha, $mensaje) {
-    $db = getConexion();
-    $sql = 'INSERT INTO comentario (fecha, mensaje) VALUES (, )';
-}
