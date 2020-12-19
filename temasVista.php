@@ -1,15 +1,13 @@
-
 <?php
 include 'modelo/conexion.php';
 
 session_start();
 
 if (isset($_SESSION['usuario'])) {
-    header('Location:indexSesionIniciadaVista.php?usuario='.$_SESSION['usuario'].'&id_usuario='.$_SESSION['id_usuario']);
+    header('Location:temasSesionIniciadaVista.php?usuario='.$_SESSION['usuario']);
 }
 
 ?>
-
 
 <!doctype html>
 <html lang="es">
@@ -31,11 +29,13 @@ if (isset($_SESSION['usuario'])) {
     </div>
 </nav>
 
+
 <?php
 
 // Obtencion de resultados por consulta
 try {
-    $statement = $conexion->prepare('SELECT DISTINCT tema.categoria, tema.id_tema, COUNT(comentario.mensaje) as comentarios FROM tema LEFT JOIN comentario on tema.id_tema = comentario.id_tema GROUP BY tema.categoria');
+    $idTema = $_GET['id_tema'];
+    $statement = $conexion->prepare('SELECT mensaje, fecha, usuario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema);
     $statement-> execute();
 
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -43,18 +43,17 @@ try {
     // Se visualizan todos los datos en una tabla
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de temas </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
+    echo "<p><b> Listado de comentarios </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
     echo "<table border='1' cellpadding='10'>";
-    echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
+    echo "<tr> <th> Comentario </th> <th> Fecha </th> <th> Usuario </th><th></th> <th></th></tr>";
 
     foreach ($comentarios as $comentario) {
         echo "<tr>";
-        echo "<td>" ,$comentario['categoria'], "</td>";
-        echo "<td>" ,$comentario['comentarios'], "</td>";
+        echo "<td>" ,$comentario['mensaje'], "</td>";
+        echo "<td>" ,$comentario['fecha'], "</td>";
+        echo "<td>" ,$comentario['usuario'], "</td>";
+        echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php'> Eliminar </a>", "</td>";
 
-        $idTema = $comentario['id_tema'];
-
-        echo "<td><a href='temasVista.php?id_tema=$idTema","'>Ver tema</a></td>";
         echo "</tr>";
     }
 
@@ -63,13 +62,17 @@ try {
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
+
 ?>
 
-<p><a href="New.php">Añadir un nuevo tema (Solo si es admin)</a></p>
+<p><a href="nuevoComentarioVista.php"> Añadir un nuevo comentario </a></p>
+<!--Solo si es usuario está registrado-->
 
 <p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
 
 
 </body>
 </html>
+
+
 

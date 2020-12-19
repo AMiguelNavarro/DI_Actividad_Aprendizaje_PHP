@@ -1,15 +1,6 @@
-
 <?php
 include 'modelo/conexion.php';
-
-session_start();
-
-if (isset($_SESSION['usuario'])) {
-    header('Location:indexSesionIniciadaVista.php?usuario='.$_SESSION['usuario'].'&id_usuario='.$_SESSION['id_usuario']);
-}
-
 ?>
-
 
 <!doctype html>
 <html lang="es">
@@ -43,7 +34,7 @@ try {
     // Se visualizan todos los datos en una tabla
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de temas </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
+    echo "<p><b> Listado de temas |</b></p>";
     echo "<table border='1' cellpadding='10'>";
     echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
 
@@ -54,7 +45,7 @@ try {
 
         $idTema = $comentario['id_tema'];
 
-        echo "<td><a href='temasVista.php?id_tema=$idTema","'>Ver tema</a></td>";
+        echo "<td><a href='temasSesionIniciadaVista.php?id_tema=$idTema","'>Ver tema</a></td>";
         echo "</tr>";
     }
 
@@ -72,4 +63,3 @@ try {
 
 </body>
 </html>
-
