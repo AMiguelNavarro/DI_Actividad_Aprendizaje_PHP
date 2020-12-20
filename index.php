@@ -35,7 +35,7 @@ if (isset($_SESSION['usuario'])) {
 
 // Obtencion de resultados por consulta
 try {
-    $statement = $conexion->prepare('SELECT DISTINCT tema.categoria, tema.id_tema, COUNT(comentario.mensaje) as comentarios FROM tema LEFT JOIN comentario on tema.id_tema = comentario.id_tema GROUP BY tema.categoria');
+    $statement = $conexion->prepare('SELECT DISTINCT tema.categoria, tema.id_tema, COUNT(comentario.mensaje) as comentarios FROM tema LEFT JOIN comentario on tema.id_tema = comentario.id_tema GROUP BY tema.categoria ORDER BY tema.id_tema DESC');
     $statement-> execute();
 
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);

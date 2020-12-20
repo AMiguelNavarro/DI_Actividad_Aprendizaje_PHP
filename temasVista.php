@@ -35,7 +35,7 @@ if (isset($_SESSION['usuario'])) {
 // Obtencion de resultados por consulta
 try {
     $idTema = $_GET['id_tema'];
-    $statement = $conexion->prepare('SELECT mensaje, fecha, usuario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema);
+    $statement = $conexion->prepare('SELECT mensaje, fecha, usuario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
     $statement-> execute();
 
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
