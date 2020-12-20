@@ -63,9 +63,11 @@ try {
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
-?>
+if (isset($_SESSION['privilegio'])) {
+    echo "<p><a href='insertarNuevoTemaVista.php'>Añadir un nuevo tema </a></p>";
+}
 
-<p><a href="insertarNuevoTemaVista.php">Añadir un nuevo tema (Solo si es admin)</a></p>
+?>
 
 <p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
 

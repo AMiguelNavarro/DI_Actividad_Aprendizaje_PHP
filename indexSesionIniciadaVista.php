@@ -55,7 +55,12 @@ try {
 
         $idTema = $comentario['id_tema'];
 
-        echo "<td><a href='temasSesionIniciadaVista.php?id_tema=$idTema","'>Ver tema</a></td>";
+        echo "<td><a href='temasSesionIniciadaVista.php?id_tema=$idTema'> Ver tema </a></td>";
+
+        if ($_SESSION['privilegio'] == "0") {
+            echo "<td><a href='modelo/eliminarTemaModelo.php?id_tema=$idTema'> Eliminar Tema </a></td>";
+        }
+
         echo "</tr>";
     }
 
@@ -64,9 +69,11 @@ try {
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
-?>
+if (isset($_SESSION['privilegio']) && $_SESSION['privilegio'] == "0") {
+    echo "<p><a href='insertarNuevoTemaVista.php'>Añadir un nuevo tema </a></p>";
+}
 
-<p><a href="New.php">Añadir un nuevo tema (Solo si es admin)</a></p>
+?>
 
 <p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
 
