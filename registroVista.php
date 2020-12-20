@@ -34,7 +34,7 @@
                 <label for="exampleInputEmail1">Email:</label>
                 <input type="text" class="form-control" name="email" id="email" placeholder="ejemplo@email.com">
             </div>
-            <button type="submit" class="btn btn-primary">Inicia Sesión</button>
+            <button type="submit" class="btn btn-primary"> Regístrate </button>
         </form>
     </div>
 </div>

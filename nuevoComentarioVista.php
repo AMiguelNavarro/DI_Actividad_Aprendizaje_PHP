@@ -33,12 +33,12 @@ if (!isset($_SESSION['usuario'])) {
 <div id="contenedor-formulario-padre">
     <div id="contenedor-formulario-hijo">
 
-        <form method="post" action="">
+        <form method="post" action="modelo/insertarComentarioModelo.php?id_tema=<?php $idtema= $_GET['id_tema']; echo $idtema; ?>">
             <div class="form-group">
                 <label for="exampleInputText">Mensaje:</label>
                 <input type="text" class="form-control" name="mensaje" id="mensaje" placeholder="Introduce tu mensaje ...">
             </div>
-            <input type="submit" name="submit" value="Insertar Usuario"/>
+            <button type="submit" class="btn btn-primary"> Insertar Comentario </button>
         </form>
     </div>
 </div>
@@ -46,38 +46,6 @@ if (!isset($_SESSION['usuario'])) {
 </body>
 </html>
 
-<?php
-require_once 'modelo/conexion.php';
-if (isset($_POST['submit'])) {
-    //Recogemos los datos
-    $mensaje = $_POST['mensaje'];
-    $fecha = date("Y-m-d");
-
-    //Se comprueba que no estén en blanco
-    if (!isset($mensaje) || $mensaje = '') {
-
-        echo "Debes escribir un comentario";
-
-    } else {
-
-        //Guardar los datos en la bd
-        try {
-
-            $sentencia = $conexion->prepare("INSERT INTO comentario (id_usuario, id_tema, fecha, mensaje) VALUES (?,?,?,?)");
-            $sentencia->bindParam(1, $_SESSION['id_usuario']);
-            $sentencia->bindParam(2, $_GET['id_tema']);
-            $sentencia->bindParam(3, $fecha);
-            $sentencia->bindParam(4, $_POST['mensaje']);
-
-            $sentencia->execute();
-
-            header('Location:temasSesionIniciadaVista.php?id_tema=' . $_GET['id_tema']);
-
-        } catch (PDOException $e) {
-            echo "ERROR al guardar los datos en la base de datos " . $e->getMessage();
-        }
-    }
-}
 
 
 

@@ -70,6 +70,8 @@ try {
     echo "<p><a href='nuevoComentarioVista.php?id_tema=$idTema'> Añadir un nuevo comentario </a></p>";
 ?>
 
+<p><a href="index.php"> Volver al inicio</a></p>
+
 
 <!--Solo si es usuario está registrado-->
 

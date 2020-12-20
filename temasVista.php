@@ -67,6 +67,8 @@ try {
 <p><a href="nuevoComentarioVista.php"> Añadir un nuevo comentario </a></p>
 <!--Solo si es usuario está registrado-->
 
+<p><a href="index.php"> Volver al inicio</a></p>
+
 <p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
 
 
