@@ -52,7 +52,10 @@ try {
         $idUsuarioComentario = $comentario['id_usuario'];
         $idComentario = $comentario['id_comentario'];
 
-        echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario'> Eliminar </a>", "</td>";
+        if ($idUsuarioComentario == $_SESSION['id_usuario'] || $_SESSION['privilegio'] == "0"){
+            echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario'> Eliminar </a>", "</td>";
+        }
+
 
         echo "</tr>";
     }

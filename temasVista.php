@@ -52,7 +52,6 @@ try {
         echo "<td>" ,$comentario['mensaje'], "</td>";
         echo "<td>" ,$comentario['fecha'], "</td>";
         echo "<td>" ,$comentario['usuario'], "</td>";
-        echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php'> Eliminar </a>", "</td>";
 
         echo "</tr>";
     }

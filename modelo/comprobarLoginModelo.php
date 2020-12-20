@@ -20,6 +20,7 @@ $registros = $resultado -> fetchAll(PDO::FETCH_ASSOC);
 foreach ($registros as $registro){
 
      $idUsuario = $registro['id_usuario'];
+     $privilegio = $registro['privilegio'];
 
     if (password_verify($contrasenia, $registro['contraseña'])) {
         // Si entra aquí el contador se aumentará en uno
@@ -37,6 +38,7 @@ if ($contador > 0) {
     // al estar en a superglobal lo podemos usar en cualqueir sitio
     $_SESSION['usuario'] = $_POST['usuario'];
     $_SESSION['id_usuario'] = $idUsuario;
+    $_SESSION['privilegio'] = $privilegio;
 
     header("Location:../index.php");
 } else {

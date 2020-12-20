@@ -5,7 +5,7 @@ include 'modelo/conexion.php';
 session_start();
 
 if (isset($_SESSION['usuario'])) {
-    header('Location:indexSesionIniciadaVista.php?usuario='.$_SESSION['usuario'].'&id_usuario='.$_SESSION['id_usuario']);
+    header('Location:indexSesionIniciadaVista.php?usuario='.$_SESSION['usuario'].'&id_usuario='.$_SESSION['id_usuario'].'&privilegio='.$_SESSION['privilegio']);
 }
 
 ?>
@@ -65,7 +65,7 @@ try {
 
 ?>
 
-<p><a href="New.php">Añadir un nuevo tema (Solo si es admin)</a></p>
+<p><a href="insertarNuevoTemaVista.php">Añadir un nuevo tema (Solo si es admin)</a></p>
 
 <p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
 

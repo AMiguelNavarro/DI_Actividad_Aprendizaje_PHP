@@ -21,7 +21,7 @@
 <div id="contenedor-formulario-padre">
     <div id="contenedor-formulario-hijo">
 
-        <form method="post" action="modelo/comprobarLogin.php">
+        <form method="post" action="modelo/comprobarRegistroModelo.php">
             <div class="form-group">
                 <label for="exampleInputEmail1">Usuario:</label>
                 <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Introduce tu usuario ...">
@@ -35,7 +35,6 @@
                 <input type="text" class="form-control" name="email" id="email" placeholder="ejemplo@email.com">
             </div>
             <button type="submit" class="btn btn-primary">Inicia Sesión</button>
-            <p>¿No tienes cuenta? <a href="modelo/registroModelo.php"> REGÍSTRATE </a></p>
         </form>
     </div>
 </div>

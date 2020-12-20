@@ -1,5 +1,8 @@
 <?php
 include 'modelo/conexion.php';
+
+session_start();
+
 ?>
 
 <!doctype html>
@@ -31,10 +34,17 @@ try {
 
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
+    if ($_SESSION['privilegio'] == "0") {
+        $mensaje = "SUPER ADMIN";
+    } elseif ($_SESSION['privilegio'] == "1") {
+        $mensaje = "MODERADOR";
+    }
+
     // Se visualizan todos los datos en una tabla
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de temas |</b></p>";
+    echo "<p><b> Listado de temas |</b> Bienvenid@ " . $_SESSION['usuario'] . " $mensaje</p>";
     echo "<table border='1' cellpadding='10'>";
     echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
 
