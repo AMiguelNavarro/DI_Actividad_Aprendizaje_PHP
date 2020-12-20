@@ -8,8 +8,14 @@ body {
     color: aliceblue;
 }
 
+
+#tabla-temas {
+    width: 80%;
+}
+
 #contenedor-formulario-padre {
     width: 30%;
+    display: flex;
 }
 
 #contenedor-formulario-hijo{
@@ -46,12 +52,6 @@ body {
     font-size: 3vh;
     font-weight: bold;
 }
-
-.jumbotron {
-    background-color:transparent !important;
-}
-
-
 
 
 body {

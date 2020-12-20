@@ -44,7 +44,7 @@ try {
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
     echo "<p><b> Listado de temas </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
-    echo "<table border='1' cellpadding='10'>";
+    echo "<table border='1' cellpadding='10' class='table'>";
     echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
 
     foreach ($comentarios as $comentario) {

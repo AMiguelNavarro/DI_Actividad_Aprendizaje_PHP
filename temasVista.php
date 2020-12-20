@@ -43,8 +43,9 @@ try {
     // Se visualizan todos los datos en una tabla
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
+    echo '<div id="contenedor-temas" class="contenedor-temas">';
     echo "<p><b> Listado de comentarios </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
-    echo "<table border='1' cellpadding='10'>";
+    echo "<table border='1' cellpadding='10' class='table'>";
     echo "<tr> <th> Comentario </th> <th> Fecha </th> <th> Usuario </th><th></th> <th></th></tr>";
 
     foreach ($comentarios as $comentario) {
@@ -55,6 +56,8 @@ try {
 
         echo "</tr>";
     }
+
+    echo "</div>";
 
     echo"</table>";
 } catch (PDOException $pdoe){

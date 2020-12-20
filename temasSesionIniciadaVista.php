@@ -35,13 +35,19 @@ try {
     $statement = $conexion->prepare('SELECT mensaje, fecha, usuario, u.id_usuario, c.id_comentario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
     $statement-> execute();
 
+    if ($_SESSION['privilegio'] == "0") {
+        $mensaje = "SUPER ADMIN";
+    } elseif ($_SESSION['privilegio'] == "1") {
+        $mensaje = "MODERADOR";
+    }
+
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     // Se visualizan todos los datos en una tabla
     // Se muestran los links necesarios para ver sin paginar o paginados.
     // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de comentarios </b></p>";
-    echo "<table border='1' cellpadding='10'>";
+    echo "<p><b> Listado de comentarios |</b> Bienvenid@ " . $_SESSION['usuario'] . " $mensaje</p></p>";
+    echo "<table border='1' cellpadding='10' class='table'>";
     echo "<tr> <th> Comentario </th> <th> Fecha </th> <th> Usuario </th><th></th> <th></th></tr>";
 
     foreach ($comentarios as $comentario) {
