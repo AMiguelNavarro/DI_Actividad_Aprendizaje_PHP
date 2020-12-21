@@ -24,7 +24,7 @@ session_start();
 </div>
 
 <div class="barra-navegador">
-    <a href="index.php"> Inicio </a>
+    <a href="index.php"> Temas </a>
 </div>
 
 <div class="main">
@@ -78,31 +78,42 @@ try {
 
     }
 
-//    Final div col izda
-    echo "</div>";
-
 } catch (PDOException $pdoe){
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
 ?>
 
-        <div class="columna-derecha">
+    </div>
 
-            <div class="tarjeta">
+    <div class="columna-derecha">
 
-                <div class="texto-sesion-iniciada">
+        <div class="tarjeta">
 
-                    <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
+            <div class="texto-sesion-iniciada">
 
-                </div>
-
-                <div class="enlace-cerrar-sesión">
-                    <a href="cerrarSesion.php"> Cerrar Sesión </a>
-                </div>
-
+                <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
 
             </div>
+
+            <div class="enlace-cerrar-sesión">
+                <a href="cerrarSesion.php"> Cerrar Sesión </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Final div main   -->
+</div>
+
+
+<div class="pie-pagina">
+
+    <footer>
+        <h2> © Foro Alberto Miguel Navarro </h2>
+    </footer>
+
+</div>
 
 
 </body>

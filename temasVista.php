@@ -27,7 +27,7 @@ if (isset($_SESSION['usuario'])) {
 </div>
 
 <div class="barra-navegador">
-    <a href="index.php"> Inicio </a>
+    <a href="index.php"> Temas </a>
 </div>
 
 <div class="main">
@@ -91,7 +91,7 @@ try {
                     <span> <p> Contraseña: </p></span>
                     <input type="password" name="contrasenia" id="contrasenia">
 
-                    <br>
+                    <br> <br>
                     <input type="submit" value="Iniciar Sesión">
 
                 </form>
@@ -109,6 +109,9 @@ try {
                     <input type="password" name="contrasenia" id="contrasenia">
                     <span> <p> Email: </p></span>
                     <input type="text" name="email" id="email">
+
+                    <br> <br>
+                    <input type="submit" value="Regístrate">
 
                 </form>
 
