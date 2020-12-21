@@ -55,7 +55,7 @@ try {
 
         $idTema = $comentario['id_tema'];
 
-        echo "<a href='temasVista.php?id_tema=$idTema'>Ver tema</a>";
+        echo "<a href='temasSesionIniciadaVista.php?id_tema=$idTema'>Ver tema</a>";
 
         if ($_SESSION['privilegio'] == "0") {
             echo "<p><a href='insertarNuevoTemaVista.php'> Añadir un nuevo tema </a></p>";
@@ -93,15 +93,6 @@ try {
 
 
             </div>
-
-            <div class="tarjeta">
-
-
-
-            </div>
-
-
-
 
 
 </body>

@@ -13,27 +13,32 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" type ="text/css" href="css/estilo.css">
     <title> FORO </title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Foro PHP</a>
-        </div>
-    </div>
-</nav>
+<div class="header">
+    <h1> Foro con PHP </h1>
+    <h3> Trabajo final 1ª Evaluación Alberto Miguel Navarro</h3>
+</div>
 
+<div class="barra-navegador">
+    <a href="index.php"> Inicio </a>
+</div>
+
+<div class="main">
+    <div class="columna-izquierda">
 
 <?php
 
 // Obtencion de resultados por consulta
 try {
     $idTema = $_GET['id_tema'];
-    $statement = $conexion->prepare('SELECT mensaje, fecha, usuario, u.id_usuario, c.id_comentario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
+    $statement = $conexion->prepare('SELECT mensaje, fecha, usuario, categoria, u.id_usuario, c.id_comentario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
     $statement-> execute();
+
+    $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if ($_SESSION['privilegio'] == "0") {
         $mensaje = "SUPER ADMIN";
@@ -41,47 +46,63 @@ try {
         $mensaje = "MODERADOR";
     }
 
-    $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    // Se visualizan todos los datos en una tabla
-    // Se muestran los links necesarios para ver sin paginar o paginados.
-    // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de comentarios |</b> Bienvenid@ " . $_SESSION['usuario'] . " $mensaje</p></p>";
-    echo "<table border='1' cellpadding='10' class='table'>";
-    echo "<tr> <th> Comentario </th> <th> Fecha </th> <th> Usuario </th><th></th> <th></th></tr>";
-
-    foreach ($comentarios as $comentario) {
-        echo "<tr>";
-        echo "<td>" ,$comentario['mensaje'], "</td>";
-        echo "<td>" ,$comentario['fecha'], "</td>";
-        echo "<td>" ,$comentario['usuario'], "</td>";
-        $idUsuarioComentario = $comentario['id_usuario'];
-        $idComentario = $comentario['id_comentario'];
-
-        if ($idUsuarioComentario == $_SESSION['id_usuario'] || $_SESSION['privilegio'] == "0"){
-            echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario'> Eliminar </a>", "</td>";
-        }
-
-
-        echo "</tr>";
+    foreach ($comentarios as $coment) {
+        $tema = $coment['categoria'];
     }
 
+    echo '<div class="tarjeta">';
+        echo "<div class='titulo-tema'>";
+            echo "<h1> TEMA: " . $tema . "</h1>";
+            echo "<p><a href='nuevoComentarioVista.php?id_tema=$idTema'> Añadir un nuevo comentario </a></p>";
+        echo "</div>";
+    echo "</div>";
 
 
-    echo"</table>";
+    foreach ($comentarios as $comentario) {
+
+        echo '<div class="tarjeta">';
+
+            echo '<h3>'. $comentario['mensaje'] .'</h3>';
+
+            echo '<p> Fecha del comentario 🠚 ' . $comentario['fecha'] . '</p>';
+            echo '<p> Usuario 🠚 ' . $comentario['usuario'] . '</p>';
+
+            $idUsuarioComentario = $comentario['id_usuario'];
+            $idComentario = $comentario['id_comentario'];
+            if ($idUsuarioComentario == $_SESSION['id_usuario'] || $_SESSION['privilegio'] == "0"){
+                echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario'> Eliminar </a>", "</td>";
+            }
+
+        //        Fin del div tarjeta
+        echo '</div>';
+
+    }
+
+//    Final div col izda
+    echo "</div>";
+
 } catch (PDOException $pdoe){
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
-    echo "<p><a href='nuevoComentarioVista.php?id_tema=$idTema'> Añadir un nuevo comentario </a></p>";
 ?>
 
-<p><a href="index.php"> Volver al inicio</a></p>
+        <div class="columna-derecha">
+
+            <div class="tarjeta">
+
+                <div class="texto-sesion-iniciada">
+
+                    <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
+
+                </div>
+
+                <div class="enlace-cerrar-sesión">
+                    <a href="cerrarSesion.php"> Cerrar Sesión </a>
+                </div>
 
 
-<!--Solo si es usuario está registrado-->
-
-<p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
+            </div>
 
 
 </body>

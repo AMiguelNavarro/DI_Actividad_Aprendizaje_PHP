@@ -110,24 +110,10 @@ if (isset($_SESSION['usuario'])) {
 
         </div>
 
-<!---->
-solo cuando este iniciada la sesion <!--        <div class="tarjeta">-->
-<!---->
-
-<!---->
-<!--        </div>-->
-
     </div>
-
-
 
     <!-- Final div main -->
 </div>
-
-<div id="texto-cerrar-sesion">
-
-</div>
-
 
 <div class="pie-pagina">
 
