@@ -39,20 +39,16 @@ if (isset($_SESSION['usuario'])) {
 // Obtencion de resultados por consulta
 try {
     $idTema = $_GET['id_tema'];
-    $tema = "";
+    $tema = $_GET['tema'];
 
     $statement = $conexion->prepare('SELECT mensaje, fecha, usuario, categoria from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
     $statement-> execute();
 
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($comentarios as $coment) {
-        $tema = $coment['categoria'];
-    }
-
     echo '<div class="tarjeta">';
         echo "<div class='titulo-tema'>";
-            echo "<h1> TEMA: " . $tema . "</h1>";
+            echo "<h1> Tema: " . $tema . "</h1>";
         echo "</div>";
     echo "</div>";
 
@@ -86,13 +82,13 @@ try {
 
                 <form action="modelo/comprobarLoginModelo.php" method="POST">
 
-                    <span> <p> Usuario: </p></span>
+                    <span> <p> Usuario </p></span>
                     <input type="text" name="usuario" id="usuario">
-                    <span> <p> Contraseña: </p></span>
+                    <span> <p> Contraseña </p></span>
                     <input type="password" name="contrasenia" id="contrasenia">
 
                     <br> <br>
-                    <input type="submit" value="Iniciar Sesión">
+                    <input type="submit" value="Iniciar Sesión" class="boton-inicio-sesion">
 
                 </form>
 
@@ -103,15 +99,15 @@ try {
                 <h2> Regístrate </h2>
 
                 <form action="modelo/comprobarRegistroModelo.php" method="POST">
-                    <span> <p> Usuario: </p></span>
+                    <span> <p> Usuario </p></span>
                     <input type="text" name="usuario" id="usuario">
-                    <span> <p> Contraseña: </p></span>
+                    <span> <p> Contraseña </p></span>
                     <input type="password" name="contrasenia" id="contrasenia">
-                    <span> <p> Email: </p></span>
+                    <span> <p> Email </p></span>
                     <input type="text" name="email" id="email">
 
                     <br> <br>
-                    <input type="submit" value="Regístrate">
+                    <input type="submit" value="Regístrate" class="boton-registrarse">
 
                 </form>
 

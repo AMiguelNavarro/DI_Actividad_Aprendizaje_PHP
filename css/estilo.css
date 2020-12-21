@@ -3,6 +3,7 @@
 }
 
 body {
+
     background: lightgrey;
     font-family: Arial;
     padding: 10px;
@@ -17,8 +18,9 @@ body {
 
 .header {
     background-color: lightgrey;
-    padding: 30px;
+    padding: 25px;
     text-align: center;
+    width: 100%;
 }
 
 .header h1 {
@@ -37,13 +39,16 @@ body {
 }
 
 .barra-navegador a {
-    width: 90px;
+    width: 150px;
     float: left;
     display: block;
     color: aliceblue;
     text-align: center;
     padding: 14px;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 
 .barra-navegador a:hover {
@@ -58,13 +63,13 @@ body {
 
 .columna-izquierda {
     float: left;
-    width: 75%;
+    width: 80%;
 
 }
 
 .columna-derecha {
     float: left;
-    width: 25%;
+    width: 20%;
     padding-left: 20px;
     background-color: lightgrey;
 }
@@ -79,11 +84,134 @@ body {
 
 /************************       TARJETAS       ************************/
 
+/********   DE LA IZDA    ******/
+
 .tarjeta {
-    padding: 20px;
+    padding: 10px 20px 30px 20px;
     margin-top: 20px;
     background-color: white;
+    border-radius: 20px;
 }
+
+
+
+.columna-izquierda a {
+    width: 190px;
+    display: block;
+    background-color: #55efc4;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.tarjeta a:hover {
+
+    background-color: #81ecec ;
+
+}
+
+.columna-izquierda h2 {
+
+    font-size: 30px;
+
+}
+
+
+.enlace-nuevo-tema a {
+    width: 250px;
+    background-color: #fdcb6e;
+}
+
+.enlace-nuevo-tema a:hover {
+    background-color: #ffeaa7;
+}
+
+.numero-comentarios {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.titulo-tema a {
+    width: 250px;
+    background-color: #fdcb6e;
+}
+
+.titulo-tema a:hover {
+    background-color: #ffeaa7;
+}
+
+/********   DE LA DRCHA    ******/
+
+.texto-privilegio {
+    font-weight: bold;
+}
+
+.boton-inicio-sesion {
+    background-color: #fdcb6e;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.boton-inicio-sesion:hover {
+    background-color: #ffeaa7;
+    cursor: pointer;
+}
+
+
+.boton-registrarse {
+    background-color: #fdcb6e;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.boton-registrarse:hover {
+    background-color: #ffeaa7;
+    cursor: pointer;
+}
+
+.enlace-cerrar-sesión {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.enlace-cerrar-sesión a {
+    background-color: #d63031;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.enlace-cerrar-sesión a:hover {
+    background-color: #fab1a0;
+    color: black;
+}
+
+.texto-sesion-iniciada {
+    text-align: center;
+}
+
+.columna-derecha {
+    text-align: center;
+}
+
+
+
+
 
 
 
@@ -92,15 +220,80 @@ body {
 
 .contenedor-formulario-tema {
     text-align: center;
-    height: 500px;
+    height: 250px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.formulario-tema p {
-    font-size: 25px;
+.texto-nuevo-tema {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.input-tema-nuevo {
+    width: 450px;
+    padding: 12px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.boton-nuevo-tema {
+    background-color: #fdcb6e;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.boton-nuevo-tema:hover {
+    background-color: #ffeaa7;
+    cursor: pointer;
+}
+
+
+
+
+
+.contenedor-formulario-comentario {
+    text-align: center;
+    height: 250px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.texto-nuevo-comentario{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.input-comentario-nuevo {
+    width: 450px;
+    padding: 12px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.boton-nuevo-comentario {
+    background-color: #fdcb6e;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.boton-nuevo-comentario:hover {
+    background-color: #ffeaa7;
+    cursor: pointer;
 }
 
 

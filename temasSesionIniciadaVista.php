@@ -34,6 +34,7 @@ session_start();
 
 // Obtencion de resultados por consulta
 try {
+    $tema = $_GET['tema'];
     $idTema = $_GET['id_tema'];
     $statement = $conexion->prepare('SELECT mensaje, fecha, usuario, categoria, u.id_usuario, c.id_comentario from comentario c INNER join usuario u on c.id_usuario = u.id_usuario INNER JOIN tema t on t.id_tema = c.id_tema where t.id_tema =' . $idTema . ' ORDER BY c.id_comentario DESC');
     $statement-> execute();
@@ -41,19 +42,15 @@ try {
     $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if ($_SESSION['privilegio'] == "0") {
-        $mensaje = "SUPER ADMIN";
+        $mensaje = "ADMIN";
     } elseif ($_SESSION['privilegio'] == "1") {
         $mensaje = "MODERADOR";
     }
 
-    foreach ($comentarios as $coment) {
-        $tema = $coment['categoria'];
-    }
-
     echo '<div class="tarjeta">';
         echo "<div class='titulo-tema'>";
-            echo "<h1> TEMA: " . $tema . "</h1>";
-            echo "<p><a href='nuevoComentarioVista.php?id_tema=$idTema'> Añadir un nuevo comentario </a></p>";
+            echo "<h1> Tema: " . $tema . "</h1>";
+            echo "<p><a href='nuevoComentarioVista.php?id_tema=$idTema&tema=$tema'> Añadir un nuevo comentario </a></p>";
         echo "</div>";
     echo "</div>";
 

@@ -8,6 +8,7 @@ require_once 'conexion.php';
 $fecha = date("Y-m-d");
 $idTema = $_GET['id_tema'];
 $mensaje = $_POST['mensaje'];
+$tema = $_GET['tema'];
 
 //Se comprueba que no estén en blanco
 if (!isset($mensaje) || $mensaje = '') {
@@ -27,7 +28,7 @@ if (!isset($mensaje) || $mensaje = '') {
 
         $sentencia->execute();
 
-        header('Location:../temasSesionIniciadaVista.php?id_tema=' . $idTema);
+        header('Location:../temasSesionIniciadaVista.php?id_tema=' . $idTema . '&tema=' . $tema);
 
     } catch (PDOException $e) {
         echo "ERROR al guardar los datos en la base de datos " . $e->getMessage();

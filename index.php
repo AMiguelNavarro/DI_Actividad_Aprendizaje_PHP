@@ -53,8 +53,9 @@ if (isset($_SESSION['usuario'])) {
             echo '<div class="numero-comentarios-contenedor"> Numero de comentarios: <span class="numero-comentarios">' . $comentario['comentarios'] . '</span> </div>';
 
             $idTema = $comentario['id_tema'];
+            $tema = $comentario['categoria'];
 
-            echo "<a href='temasVista.php?id_tema=$idTema'>Ver tema</a>";
+            echo "<a href='temasVista.php?id_tema=$idTema&tema=$tema'>Ver tema</a>";
 
             //        Fin del div tarjeta
             echo '</div>';
@@ -82,13 +83,13 @@ if (isset($_SESSION['usuario'])) {
 
             <form action="modelo/comprobarLoginModelo.php" method="POST">
 
-                <span> <p> Usuario: </p></span>
+                <span> <p> Usuario </p></span>
                 <input type="text" name="usuario" id="usuario">
-                <span> <p> Contraseña: </p></span>
+                <span> <p> Contraseña </p></span>
                 <input type="password" name="contrasenia" id="contrasenia">
 
                 <br> <br>
-                <input type="submit" value="Iniciar Sesión">
+                <input type="submit" value="Iniciar Sesión" class="boton-inicio-sesion">
 
             </form>
 
@@ -99,15 +100,15 @@ if (isset($_SESSION['usuario'])) {
             <h2> Regístrate </h2>
 
             <form action="modelo/comprobarRegistroModelo.php" method="POST">
-                <span> <p> Usuario: </p></span>
+                <span> <p> Usuario </p></span>
                 <input type="text" name="usuario" id="usuario">
-                <span> <p> Contraseña: </p></span>
+                <span> <p> Contraseña </p></span>
                 <input type="password" name="contrasenia" id="contrasenia">
-                <span> <p> Email: </p></span>
+                <span> <p> Email </p></span>
                 <input type="text" name="email" id="email">
 
                 <br> <br>
-                <input type="submit" value="Regístrate">
+                <input type="submit" value="Regístrate" class="boton-registrarse">
 
             </form>
 

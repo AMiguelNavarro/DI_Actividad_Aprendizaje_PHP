@@ -48,7 +48,7 @@ try {
 
 
     if ($_SESSION['privilegio'] == "0") {
-        $mensaje = "SUPER ADMIN";
+        $mensaje = "ADMIN";
     } elseif ($_SESSION['privilegio'] == "1") {
         $mensaje = "MODERADOR";
     }
@@ -62,8 +62,9 @@ try {
         echo '<div class="numero-comentarios-contenedor"> Numero de comentarios: <span class="numero-comentarios">' . $comentario['comentarios'] . '</span> </div>';
 
         $idTema = $comentario['id_tema'];
+        $tema = $comentario['categoria'];
 
-        echo "<a href='temasSesionIniciadaVista.php?id_tema=$idTema'>Ver tema</a>";
+        echo "<a href='temasSesionIniciadaVista.php?id_tema=$idTema&tema=$tema'>Ver tema</a>";
 
         if ($_SESSION['privilegio'] == "0") {
             echo "<br>";
@@ -89,7 +90,7 @@ try {
 
                 <div class="texto-sesion-iniciada">
 
-                    <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
+                    <p> Bienvenido <span class="texto-privilegio"> <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p> </span>
 
                 </div>
 

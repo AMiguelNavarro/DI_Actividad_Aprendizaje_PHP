@@ -38,11 +38,11 @@ if (!isset($_SESSION['usuario']) || $_SESSION['privilegio'] != "0") {
 
         <form action="modelo/insertarNuevoTemaModelo.php" method="POST">
 
-            <span> <p> Nuevo tema: </p> </span>
-            <input type="text" name="categoria" id="categoria" placeholder="Introduce un nuevo tema ...">
+            <span class="texto-nuevo-tema">  Nuevo tema:  </span>
+            <input type="text" name="categoria" id="categoria" placeholder="Introduce un nuevo tema ..." class="input-tema-nuevo">
 
             <br><br>
-            <input type="submit" value="Insertar tema">
+            <input type="submit" value="Insertar tema" class="boton-nuevo-tema">
 
         </form>
 

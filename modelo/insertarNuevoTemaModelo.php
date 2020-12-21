@@ -5,7 +5,7 @@ require_once "conexion.php";
 session_start();
 
 $idUsuario = $_SESSION['id_usuario'];
-$categoria = $_POST['categoria'];
+$categoria = strtoupper($_POST['categoria']); // Lo convierte a mayúsculas para que luego se vea mejor
 
 try {
 
