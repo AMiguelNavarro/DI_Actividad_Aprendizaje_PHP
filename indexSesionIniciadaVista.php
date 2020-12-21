@@ -12,18 +12,22 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" type ="text/css" href="css/estilo.css">
     <title> FORO </title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Foro PHP</a>
-        </div>
-    </div>
-</nav>
+<div class="header">
+    <h1> Foro con PHP </h1>
+    <h3> Trabajo final 1ª Evaluación Alberto Miguel Navarro</h3>
+</div>
+
+<div class="barra-navegador">
+    <a href="index.php"> Inicio </a>
+</div>
+
+<div class="main">
+    <div class="columna-izquierda">
 
 <?php
 
@@ -41,41 +45,63 @@ try {
         $mensaje = "MODERADOR";
     }
 
-    // Se visualizan todos los datos en una tabla
-    // Se muestran los links necesarios para ver sin paginar o paginados.
-    // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de temas |</b> Bienvenid@ " . $_SESSION['usuario'] . " $mensaje</p>";
-    echo "<table border='1' cellpadding='10' class='table' id='tabla-temas'>";
-    echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
-
     foreach ($comentarios as $comentario) {
-        echo "<tr>";
-        echo "<td>" ,$comentario['categoria'], "</td>";
-        echo "<td>" ,$comentario['comentarios'], "</td>";
+
+        echo '<div class="tarjeta">';
+
+        echo '<h2>'. $comentario['categoria'] .'</h2>';
+
+        echo '<div class="numero-comentarios-contenedor"> Numero de comentarios: <span class="numero-comentarios">' . $comentario['comentarios'] . '</span> </div>';
 
         $idTema = $comentario['id_tema'];
 
-        echo "<td><a href='temasSesionIniciadaVista.php?id_tema=$idTema'> Ver tema </a></td>";
+        echo "<a href='temasVista.php?id_tema=$idTema'>Ver tema</a>";
 
         if ($_SESSION['privilegio'] == "0") {
+            echo "<p><a href='insertarNuevoTemaVista.php'> Añadir un nuevo tema </a></p>";
             echo "<td><a href='modelo/eliminarTemaModelo.php?id_tema=$idTema'> Eliminar Tema </a></td>";
         }
 
-        echo "</tr>";
+        //        Fin del div tarjeta
+        echo '</div>';
     }
 
-    echo"</table>";
+
+    //        Final del div columna izda
+    echo '</div>';
+
 } catch (PDOException $pdoe){
     echo "Error al mostrar los datos ", $pdoe->getMessage();
 }
 
-if (isset($_SESSION['privilegio']) && $_SESSION['privilegio'] == "0") {
-    echo "<p><a href='insertarNuevoTemaVista.php'>Añadir un nuevo tema </a></p>";
-}
-
 ?>
 
-<p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
+
+        <div class="columna-derecha">
+
+            <div class="tarjeta">
+
+                <div class="texto-sesion-iniciada">
+
+                    <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
+
+                </div>
+
+                <div class="enlace-cerrar-sesión">
+                    <a href="cerrarSesion.php"> Cerrar Sesión </a>
+                </div>
+
+
+            </div>
+
+            <div class="tarjeta">
+
+
+
+            </div>
+
+
+
 
 
 </body>

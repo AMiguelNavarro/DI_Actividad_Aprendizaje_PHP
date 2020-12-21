@@ -18,59 +18,124 @@ if (isset($_SESSION['usuario'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" type ="text/css" href="css/estilo.css">
     <title> FORO </title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Foro PHP</a>
-        </div>
-    </div>
-</nav>
+<div class="header">
+    <h1> Foro con PHP </h1>
+    <h3> Trabajo final 1ª Evaluación Alberto Miguel Navarro</h3>
+</div>
 
-<?php
+<div class="barra-navegador">
+    <a href="index.php"> Inicio </a>
+</div>
 
-// Obtencion de resultados por consulta
-try {
-    $statement = $conexion->prepare('SELECT DISTINCT tema.categoria, tema.id_tema, COUNT(comentario.mensaje) as comentarios FROM tema LEFT JOIN comentario on tema.id_tema = comentario.id_tema GROUP BY tema.categoria ORDER BY tema.id_tema DESC');
-    $statement-> execute();
+<div class="main">
+<div class="columna-izquierda">
 
-    $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
+    <?php
 
-    // Se visualizan todos los datos en una tabla
-    // Se muestran los links necesarios para ver sin paginar o paginados.
-    // El parametro ?page, nos indicará al tener valor 1 que es primera página de resultados posibles
-    echo "<p><b> Listado de temas </b> | <a href='loginVista.php'> Inicia Sesión</a> | <a href='registroVista.php'> Regístrate </a> </p>"; //<a href='View_Paginated.php?page=1'>Ver paginados</a>
-    echo "<table border='1' cellpadding='10' class='table'>";
-    echo "<tr> <th>Tema</th> <th>Nº de Comentarios</th><th></th> <th></th></tr>";
+    // Obtencion de resultados por consulta
+    try {
+        $statement = $conexion->prepare('SELECT DISTINCT tema.categoria, tema.id_tema, COUNT(comentario.mensaje) as comentarios FROM tema LEFT JOIN comentario on tema.id_tema = comentario.id_tema GROUP BY tema.categoria ORDER BY tema.id_tema DESC');
+        $statement-> execute();
 
-    foreach ($comentarios as $comentario) {
-        echo "<tr>";
-        echo "<td>" ,$comentario['categoria'], "</td>";
-        echo "<td>" ,$comentario['comentarios'], "</td>";
+        $comentarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $idTema = $comentario['id_tema'];
+        foreach ($comentarios as $comentario) {
 
-        echo "<td><a href='temasVista.php?id_tema=$idTema","'>Ver tema</a></td>";
-        echo "</tr>";
+            echo '<div class="tarjeta">';
+
+            echo '<h2>'. $comentario['categoria'] .'</h2>';
+
+            echo '<div class="numero-comentarios-contenedor"> Numero de comentarios: <span class="numero-comentarios">' . $comentario['comentarios'] . '</span> </div>';
+
+            $idTema = $comentario['id_tema'];
+
+            echo "<a href='temasVista.php?id_tema=$idTema'>Ver tema</a>";
+
+            //        Fin del div tarjeta
+            echo '</div>';
+        }
+
+//        Final del div columna izda
+    echo '</div>';
+
+
+
+
+    } catch (PDOException $pdoe){
+        echo "Error al mostrar los datos ", $pdoe->getMessage();
     }
 
-    echo"</table>";
-} catch (PDOException $pdoe){
-    echo "Error al mostrar los datos ", $pdoe->getMessage();
-}
 
-if (isset($_SESSION['privilegio'])) {
-    echo "<p><a href='insertarNuevoTemaVista.php'>Añadir un nuevo tema </a></p>";
-}
+    ?>
 
-?>
 
-<p><a href="cerrarSesion.php"> Cerrar sesión</a></p>
+    <div class="columna-derecha">
 
+        <div class="tarjeta">
+
+            <h2> Inicia Sesión </h2>
+
+            <form action="modelo/comprobarLoginModelo.php" method="POST">
+
+                <span> <p> Usuario: </p></span>
+                <input type="text" name="usuario" id="usuario">
+                <span> <p> Contraseña: </p></span>
+                <input type="password" name="contrasenia" id="contrasenia">
+
+                <br>
+                <input type="submit" value="Iniciar Sesión">
+
+            </form>
+
+        </div>
+
+        <div class="tarjeta">
+
+            <h2> Regístrate </h2>
+
+            <form action="modelo/comprobarRegistroModelo.php" method="POST">
+                <span> <p> Usuario: </p></span>
+                <input type="text" name="usuario" id="usuario">
+                <span> <p> Contraseña: </p></span>
+                <input type="password" name="contrasenia" id="contrasenia">
+                <span> <p> Email: </p></span>
+                <input type="text" name="email" id="email">
+
+            </form>
+
+        </div>
+
+<!---->
+solo cuando este iniciada la sesion <!--        <div class="tarjeta">-->
+<!---->
+
+<!---->
+<!--        </div>-->
+
+    </div>
+
+
+
+    <!-- Final div main -->
+</div>
+
+<div id="texto-cerrar-sesion">
+
+</div>
+
+
+<div class="pie-pagina">
+
+    <footer>
+        <h2> © Foro Alberto Miguel Navarro </h2>
+    </footer>
+
+</div>
 
 </body>
 </html>
