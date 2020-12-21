@@ -67,7 +67,7 @@ try {
             $idUsuarioComentario = $comentario['id_usuario'];
             $idComentario = $comentario['id_comentario'];
             if ($idUsuarioComentario == $_SESSION['id_usuario'] || $_SESSION['privilegio'] == "0"){
-                echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario'> Eliminar </a>", "</td>";
+                echo "<td>" ,"<a href='modelo/eliminarComentarioModelo.php?id_tema=$idTema&id_usuario=$idUsuarioComentario&id_comentario=$idComentario&tema=$tema'> Eliminar </a>", "</td>";
             }
 
         //        Fin del div tarjeta
@@ -89,7 +89,7 @@ try {
 
             <div class="texto-sesion-iniciada">
 
-                <p> Bienvenido <?php echo $_SESSION['usuario'] . " " . $mensaje ?></p>
+                <p> Bienvenido <span class="texto-privilegio"> <?php echo $_SESSION['usuario'] . " " . $mensaje ?> </span> </p>
 
             </div>
 
